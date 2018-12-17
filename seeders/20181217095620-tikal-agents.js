@@ -3,14 +3,15 @@ const agent = require('./../models/agent');
 module.exports = {
   up: (queryInterface, Sequelize) => {
       return queryInterface.sequelize.query('select * from agents', { type: queryInterface.sequelize.QueryTypes.SELECT })
-          .then((response)=>{
-              throw 'agents were already seeded'
+          .then((agents)=>{
+              if (agents.length > 0) {
+                  throw 'agents were already seeded';
+              }
           })
           .then(()=>{
           const agentsData = rawData.map((row) => {
               return { code: row.agent, address: row.address, country: row.country }
           });
-          // console.log('agentsData: ', agentsData);
 
           return queryInterface.bulkInsert('agents',agentsData, {})
       })
