@@ -12,6 +12,9 @@ const index = (req, res) => {
         group: ['code'],
         having: Sequelize.literal('count(code) = 1'),
     };
+
+
+    /*
     models.mission.findAll(query)
         .then((usersResponse) => {
             const isolatedAgents = usersResponse.map((user) => {
@@ -23,7 +26,7 @@ const index = (req, res) => {
             console.log('ooooooooooo: ', isolatedAgents);
             res.send(isolatedAgents);
         });
-
+    */
 
 };
 

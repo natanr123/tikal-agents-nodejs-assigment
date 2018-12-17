@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      agent: {
+      agent_code: {
         type: Sequelize.STRING
       },
       country: {
