@@ -1,22 +1,29 @@
 'use strict';
-const agent = require('./../models/agent');
+const models = require('./../models');
 module.exports = {
   up: (queryInterface, Sequelize) => {
-      return queryInterface.sequelize.query('select * from agents', { type: queryInterface.sequelize.QueryTypes.SELECT })
-          .then((agents)=>{
-              if (agents.length > 0) {
-                  throw 'agents were already seeded';
-              }
-          })
-          .then(()=>{
-          const agentsData = rawData.map((row) => {
-              return { code: row.agent, address: row.address, country: row.country }
-          });
 
-          return queryInterface.bulkInsert('agents',agentsData, {})
-      })
+      const missionsData = rawData.map((row) => {
+              return { agent: row.agent, address: row.address, country: row.country }
+      });
 
+      const t = models.mission.create(missionsData[0]).catch((e)=>{
+        console.log('eeeeeeeeeeeeeeee: ', e);
+      });
+      console.log('ttttttttttttt: ', t);
+      return t;
+      //const promises = missionsData.map((missionsData))
 
+    /*
+      Add altering commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.bulkInsert('People', [{
+        name: 'John Doe',
+        isBetaMember: false
+      }], {});
+    */
   },
 
   down: (queryInterface, Sequelize) => {
@@ -29,6 +36,7 @@ module.exports = {
     */
   }
 };
+
 
 const rawData = [
     {agent: '007', country: 'Brazil',

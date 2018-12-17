@@ -12,7 +12,7 @@ const index = (req, res) => {
         group: ['code'],
         having: Sequelize.literal('count(code) = 1'),
     };
-    models.agent.findAll(query)
+    models.mission.findAll(query)
         .then((usersResponse) => {
             const isolatedAgents = usersResponse.map((user) => {
             return user.get({
