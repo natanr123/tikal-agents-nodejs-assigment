@@ -3,12 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "long": "forever start -l forever.log -o out.log -e err.log ./bin/www",
-    "manual_start": "node ./bin/www",
-    "test": "jest",
-    "clean": "forever cleanlogs",
-    "stop": "forever stopall"
+    "start": "node ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "aws-sdk": "^2.315.0",
