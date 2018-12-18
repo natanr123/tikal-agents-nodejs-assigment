@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var missionsRouter = require('./routes/missions');
 
 var app = express();
+app.set('json spaces', 4);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

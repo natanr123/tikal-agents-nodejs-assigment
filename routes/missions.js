@@ -1,7 +1,5 @@
+// This code is just for testing. Not needed for the assignment
 import express from 'express';
-import {promisify} from 'util';
-
-const Sequelize = require('sequelize');
 
 const models = require('./../models');
 

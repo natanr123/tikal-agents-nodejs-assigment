@@ -33,14 +33,13 @@ const countriesByIsolation = (req, res) => {
 
 const findClosest = (req, res) => {
 	const GOOGLE_API_KEY = process.env.GOOGLE_AP_KEY;
-	const target = 'Tel Aviv, Israel';
+	const target = req.body.target;
 	const apiUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 	models.mission
 		.findAll()
 		.then((models) => {
 			const promisesArr = models.map((model)=>{
 				const url = `${apiUrl}?origins=${target}&destinations=${model.address}, ${model.country}&departure_time=now&key=${GOOGLE_API_KEY}`;
-				console.log(url);
 				return axios.get(url);
 			});
 			return Promise.all(promisesArr);
@@ -50,23 +49,20 @@ const findClosest = (req, res) => {
 				.map((response) => {
 					return response.data.rows[0].elements[0].status === 'OK' ?
 						{
-							distance: response.data.rows[0].elements[0].distance.value, address: response.data.destination_addresses
+							distance: response.data.rows[0].elements[0].distance.value, address: response.data.destination_addresses[0]
 						} : null;
 				})
-				.filter(x => x);
-
-			// console.log(values);
-
+				.filter(x => x)
+				.sort((a,b) => a.distance - b.distance)
 		})
 		.then((data)=>{
-			console.log('dddd: ', data)
 			res.send(data);
 		})
 
 };
 
 router.get('/countries-by-isolation', countriesByIsolation);
-router.get('/find-closest', findClosest);
+router.post('/find-closest', findClosest);
 
 
 module.exports = router;
