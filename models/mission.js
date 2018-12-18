@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   mission.associate = function (models) {
-    mission.belongsTo(models.agent, {foreignKey: 'agent_code', targetKey: 'code', as: 'agent'});
+    mission.belongsTo(models.agent, {foreignKey: 'agent_code', targetKey: 'code'});
     // associations can be defined here
   };
 

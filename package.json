@@ -6,7 +6,6 @@
     "start": "node ./bin/www",
     "test": "jest",
     "migrate_and_seed": "sequelize db:migrate && sequelize db:seed:all"
-
   },
   "dependencies": {
     "aws-sdk": "^2.315.0",
