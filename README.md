@@ -1,8 +1,15 @@
 A mission must be created with an agent meaning that the agent must be created before the mission
 
-**Run**
+**Run Instruction for Windows (Should be almost the same for linux)**
+```
 npm install
-npm run 
+npm run migrate_and_seed
+set GOOGLE_API_KEY=1234567
+npm start
+see the result buy navigating to localhost:3000/tikal.html
+```
+Replace GOOGLE_API_KEY with your own api key
+
 
 **Performance Considerations** 
 
@@ -11,6 +18,7 @@ I am increase the mission count for an agent each I time a mission is created.
 For simplicity I do not decrease the mission count on mission delete (or update mission) but it should work the same way
 
 It is also possible to create a counties table and track the number of isolated agents but I have preferred to use join
+It is also possible to keep track of the most isolated county so we will not need to sort each time
 
 Cheat sheet for sequelize for later use:
 ```

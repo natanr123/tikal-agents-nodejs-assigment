@@ -32,7 +32,7 @@ const countriesByIsolation = (req, res) => {
 };
 
 const findClosest = (req, res) => {
-	const GOOGLE_API_KEY = process.env.GOOGLE_AP_KEY;
+	const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 	const target = req.body.target;
 	const apiUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json';
 	models.mission
