@@ -1,5 +1,9 @@
 A mission must be created with an agent meaning that the agent must be created before the mission
 
+**Run**
+npm install
+npm run 
+
 **Performance Considerations** 
 
 In order to increase performance for countries-by-isolation
