@@ -7,8 +7,8 @@ module.exports = {
     console.log('ssssssssssssssssss');
 
     const ps = rawData.map((row) => {
-      const data = { agent: models.agent.find({code: row.agent_code}), country: row.country, address: row.address, mission_date: row.date };
-      return models.mission.create(data, { include: [{model: models.agent, as: 'agent'}] });
+      const data = { agent_code: row.agent, country: row.country, address: row.address, mission_date: row.date };
+      return models.mission.create(data);
     });
     return Promise.all(ps);
     /*

@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var agentsRouter = require('./routes/missions');
+var missionsRouter = require('./routes/missions');
 
 var app = express();
 
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
-app.use('/agents', agentsRouter);
+app.use('/missions', missionsRouter);
 
 
 
