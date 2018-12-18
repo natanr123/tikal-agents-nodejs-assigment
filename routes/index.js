@@ -1,4 +1,5 @@
 import express from 'express';
+import axios from 'axios';
 
 const Sequelize = require('sequelize');
 
@@ -7,7 +8,6 @@ const models = require('./../models');
 const router = express.Router();
 
 const countriesByIsolation = (req, res) => {
-
 	models.mission
 		.findAll({
 			include:[models.agent],
@@ -31,7 +31,42 @@ const countriesByIsolation = (req, res) => {
 		})
 };
 
+const findClosest = (req, res) => {
+	const GOOGLE_API_KEY = process.env.GOOGLE_AP_KEY;
+	const target = 'Tel Aviv, Israel';
+	const apiUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json';
+	models.mission
+		.findAll()
+		.then((models) => {
+			const promisesArr = models.map((model)=>{
+				const url = `${apiUrl}?origins=${target}&destinations=${model.address}, ${model.country}&departure_time=now&key=${GOOGLE_API_KEY}`;
+				console.log(url);
+				return axios.get(url);
+			});
+			return Promise.all(promisesArr);
+		})
+		.then((responses)=> {
+			return responses
+				.map((response) => {
+					return response.data.rows[0].elements[0].status === 'OK' ?
+						{
+							distance: response.data.rows[0].elements[0].distance.value, address: response.data.destination_addresses
+						} : null;
+				})
+				.filter(x => x);
+
+			// console.log(values);
+
+		})
+		.then((data)=>{
+			console.log('dddd: ', data)
+			res.send(data);
+		})
+
+};
+
 router.get('/countries-by-isolation', countriesByIsolation);
+router.get('/find-closest', findClosest);
 
 
 module.exports = router;
