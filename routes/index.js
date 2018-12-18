@@ -26,8 +26,8 @@ const countriesByIsolation = (req, res) => {
 		})
 		.then((isolatedArr)=>{
 			// The order should have been done by sql but I had some issues with Sequelize
-			const orderd = isolatedArr.sort((a,b) => b.isolatedCount - a.isolatedCount)
-			res.send(orderd[0]);
+			const ordered = isolatedArr.sort((a,b) => b.isolatedCount - a.isolatedCount)
+			res.send(ordered[0]);
 		})
 };
 
